@@ -9,5 +9,6 @@
     background-image: url('@/assets/images/profile_icon.png');
     background-size: cover;
     cursor: pointer;
+    border: 1px solid var(--color-black);
   }
 </style>

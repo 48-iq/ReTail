@@ -1,4 +1,4 @@
-import type { Category, Subcategory } from "@/entities/category";
+import type { CategoryType, SubcategoryType } from "@/entities/category";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { categoryActions } from "@/entities/category";
@@ -6,12 +6,12 @@ import { categoryActions } from "@/entities/category";
 export const useCategoriesPanelStore = defineStore('categoriesPanel', () => {
 
   const isPanelActive = ref(false)
-  const categories = ref<Category[]>([])
+  const categories = ref<CategoryType[]>([])
 
-  const selectedCategory = ref<Category | null>(null)
-  const selectedSubcategory = ref<Subcategory | null>(null)
+  const selectedCategory = ref<CategoryType | null>(null)
+  const selectedSubcategory = ref<SubcategoryType | null>(null)
 
-  const pointedCategory = ref<Category | null> (null)
+  const pointedCategory = ref<CategoryType | null> (null)
 
   const panelSize = ref<number>(1)
 

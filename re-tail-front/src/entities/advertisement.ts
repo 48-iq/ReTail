@@ -1,9 +1,22 @@
 import axios from "axios"
-import type { CategoryInfo, Subcategory } from "./category"
-import type { UserInfo } from "./user"
+import type { CategoryInfoType, SubcategoryType } from "./category"
+import type { UserInfoType } from "./user"
 import { host } from "./host"
 
-export type Advertisement = {
+export type AdvertisementFormType = {
+  title: string
+  description: string
+  images: File[]
+  price: number
+  contacts: string
+  address: string
+  characteristics: CharacteristicType[]
+  category: string
+  subcategory: string
+
+}
+
+export type AdvertisementType = {
   id: string
   title: string
   description: string
@@ -12,28 +25,29 @@ export type Advertisement = {
   contacts: string
   createdAt: string
   address: string
-  characteristics: Characteristic[]
-  creator: UserInfo
-  category:  CategoryInfo
-  subcategory: Subcategory
-  sameAdvertisement: AdvertisementCard[]
+  characteristics: CharacteristicType[]
+  creator: UserInfoType
+  category:  CategoryInfoType
+  subcategory: SubcategoryType
+  sameAdvertisement: AdvertisementCardType[]
 }
 
-export type AdvertisementCard = {
+export type AdvertisementCardType = {
   id: string
   title: string
   price: number
-  creator: UserInfo
+  image: string
+  creator: UserInfoType
 }
 
-export type AdvertisementCardsPage = {
+export type AdvertisementCardsPageType = {
   total: number
   page: number
   size: number
-  advertisementCards: AdvertisementCard[]
+  advertisementCards: AdvertisementCardType[]
 }
 
-export type Characteristic = {
+export type CharacteristicType = {
   name: string
   value: string
 }
@@ -44,7 +58,7 @@ export const advertisementActions = {
     category: string|null,
     subcategory: string|null,
     page: number,
-    size: number) => axios.get<AdvertisementCardsPage>(`${host}/advertisement`,
+    size: number) => axios.get<AdvertisementCardsPageType>(`${host}/advertisement-cards`,
     {
       params: {
         query: query? query: undefined,
@@ -55,5 +69,11 @@ export const advertisementActions = {
       }
     }
   )
-  .then(res => res)
+  .then(res => res),
+
+  fetchAdvertisement: async (
+    id: string) => axios.get<AdvertisementType>(`${host}/advertisement/${id}`)
+  .then(res => res),
+
+
 }

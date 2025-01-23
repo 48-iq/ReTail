@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useCategoriesPanelStore } from '@/stores/categoriesPanelStore';
-import AllCategoriesButton from './AllCategoriesButton.vue';
-import CategoryButton from './CategoryButton.vue';
+import AllCategoriesButton from '../../shared/ui/buttons/AllCategoriesButton.vue';
+import CategoryButton from '../../shared/ui/buttons/CategoryButton.vue';
 
 const categoriesPanelState = useCategoriesPanelStore()
 
