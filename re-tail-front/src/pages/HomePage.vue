@@ -1,11 +1,20 @@
 <script setup lang="ts">
-import AdvertisementCardList from '@/features/advertisement/AdvertisementList.vue';
+import AnnouncementCardsWidget from '@/widgets/AnnouncementCardsWidget.vue';
 import { useCategoriesPanelStore } from '@/stores/categoriesPanelStore';
 import AppHeader from '@/widgets/AppHeader.vue';
 import CategoriesPanel from '@/widgets/CategoriesPanel.vue';
+import { useRoute } from 'vue-router';
 
 //state initialization
 const categoriesPanelState = useCategoriesPanelStore()
+
+const route = useRoute()
+
+const urlParams = new URLSearchParams(route.fullPath.substring(route.fullPath.indexOf('?')))
+
+const query = urlParams.get('query')
+const category = urlParams.get('category')
+const subcategory = urlParams.get('subcategory')
 
 </script>
 
@@ -13,6 +22,8 @@ const categoriesPanelState = useCategoriesPanelStore()
   <div>
     <AppHeader/>
     <CategoriesPanel v-if="categoriesPanelState.isPanelActive"/>
-    <AdvertisementCardList/>
+    <AnnouncementCardsWidget :query 
+    :category 
+    :subcategory/>
   </div>
 </template>

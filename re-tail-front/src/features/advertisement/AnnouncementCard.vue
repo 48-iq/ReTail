@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AdvertisementCardType } from '@/entities/advertisement';
+import type { AnnouncementCardType } from '@/entities/announcement';
 import BaseButton from '@/shared/ui/buttons/BaseButton.vue';
 import CardImage from '@/shared/ui/images/CardImage.vue';
 import PriceInfo from '@/shared/ui/info/PriceInfo.vue';
@@ -17,7 +17,7 @@ const routeToAdvertisement = (id: string) => {
   router.push(`/advertisements/${id}`)
 }
 
-const { advertisementCard } = defineProps<{advertisementCard: AdvertisementCardType}>()
+const { advertisementCard } = defineProps<{advertisementCard: AnnouncementCardType}>()
 
 </script>
 
@@ -32,7 +32,7 @@ const { advertisementCard } = defineProps<{advertisementCard: AdvertisementCardT
     <div class="seller-link" @click="routeToUser(advertisementCard.creator.id)">
       {{ advertisementCard.creator.nickname }}
     </div>
-    <BaseButton>В избранное</BaseButton>
+    <BaseButton>{{ advertisementCard.inFavourites ? 'Удалить из избранного' : 'В избранное' }}</BaseButton>
   </div>
 </template>
 

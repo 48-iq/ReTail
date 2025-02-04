@@ -9,7 +9,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SubcategoryDto {
+public class UserInfoDto {
     private String id;
-    private String name;
+    private String avatar;
+    private String nickname;
+    private Double rating;
+
 }

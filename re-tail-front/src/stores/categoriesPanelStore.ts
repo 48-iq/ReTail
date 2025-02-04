@@ -72,11 +72,25 @@ export const useCategoriesPanelStore = defineStore('categoriesPanel', () => {
     return panelSize.value
   }
 
+  const getSelectedCategoryId = () => {
+    if (selectedCategory.value === null)
+      return null
+    else
+      return selectedCategory.value.id
+  }
+
+  const getSelectedSubcategoryId = () => {
+    if (selectedSubcategory.value === null)
+      return null
+    else
+      return selectedSubcategory.value.id
+  }
+
   return {isPanelActive, togglePanel, getPanelSize,
     fetchCategories, categories,
     selectCategory, selectSubcategory, selectAllCategories,
     selectedCategory, selectedSubcategory,
     pointCategory, pointAllCategories, pointedCategory,
-    getSelectedCategoriesNames
+    getSelectedCategoriesNames, getSelectedCategoryId, getSelectedSubcategoryId
   }
 })
