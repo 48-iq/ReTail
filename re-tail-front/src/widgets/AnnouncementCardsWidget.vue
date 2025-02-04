@@ -11,7 +11,6 @@ const {query, category, subcategory} =
 
 onMounted(() => {
   announcementCardsWidgetStore.clear()
-  announcementCardsWidgetStore.initialFetch({query, category, subcategory, page:0, size:10})
 })
 
 const bottomDivRef = useTemplateRef('bottom-div')
@@ -20,19 +19,21 @@ const isBottomDivVisible = useElementVisibility(bottomDivRef, )
 
 
 watch(isBottomDivVisible, () => {
-  console.log(isBottomDivVisible.value)
+
   if (isBottomDivVisible.value && 
-  announcementCardsWidgetStore.lastPage < announcementCardsWidgetStore.total && 
+  announcementCardsWidgetStore.last + 1 < announcementCardsWidgetStore.total && 
   !announcementCardsWidgetStore.isLoading
 ) {
-    announcementCardsWidgetStore.fetchLast({query, category, subcategory, page:announcementCardsWidgetStore.lastPage+1, size:10})
+    announcementCardsWidgetStore.fetchCards(
+      {query, category, subcategory, page:announcementCardsWidgetStore.last+1, size:10}
+    )
   }
 })
 </script>
 
 <template>
   <AdvertisementCardList :advertisement-cards="announcementCardsWidgetStore.advertisementCards"/>
-  <div v-if="announcementCardsWidgetStore.advertisementCards.length" ref="bottom-div" id="bottom-div"/>
+  <div ref="bottom-div" id="bottom-div"/>
 </template>
 
 <style scoped>

@@ -32,6 +32,7 @@ const search = () => {
   let paramsCount = 0
   if (searchStore.searchBar) paramsCount++;
   if (categoriesPanelState.selectedCategory) paramsCount++;
+  console.log(categoriesPanelState.selectedSubcategory, categoriesPanelState.selectedCategory)
   if (categoriesPanelState.selectedSubcategory) paramsCount++;
   if (paramsCount > 0) {
     paramsStr += '?'
@@ -41,16 +42,18 @@ const search = () => {
     }
     if (paramsCount>0) paramsStr += '&'
     if (categoriesPanelState.selectedCategory) {
-      paramsStr += 'category=' + categoriesPanelState.selectedCategory
+      paramsStr += 'category=' + categoriesPanelState.selectedCategory.id
       paramsCount--;
     }
     if (paramsCount>0) paramsStr += '&'
     if (categoriesPanelState.selectedSubcategory) {
-      paramsStr += 'subcategory=' + categoriesPanelState.selectedSubcategory
+      paramsStr += 'subcategory=' + categoriesPanelState.selectedSubcategory.id
     }
 
   }
+  console.log(paramsStr)
   router.push('/home' + paramsStr)
+  .then(() => router.go(0))
 }
 
 </script>

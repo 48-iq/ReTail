@@ -32,7 +32,7 @@ public class AnnouncementController {
         return ResponseEntity.ok(PageDto.<AnnouncementCardDto>builder()
                 .page(page)
                 .size(size)
-                .total(allData.size() / size)
+                .total(allData.size() / size + (allData.size() % size == 0 ? 0 : 1))
                 .data(allData.stream().skip(page * size).limit(size).toList())
                 .build());
     }

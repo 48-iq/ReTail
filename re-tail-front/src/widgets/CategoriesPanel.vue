@@ -2,13 +2,8 @@
 import CategoryList from '@/features/category/CategoryList.vue';
 import SubcategoryList from '@/features/category/SubcategoryList.vue';
 import { useCategoriesPanelStore } from '@/stores/categoriesPanelStore';
-import { onMounted} from 'vue';
 
 const categoriesPanelState = useCategoriesPanelStore()
-onMounted(() => {
-  categoriesPanelState.fetchCategories()
-})
-
 
 
 </script>

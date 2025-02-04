@@ -15,7 +15,7 @@ export const useCategoriesPanelStore = defineStore('categoriesPanel', () => {
 
   const panelSize = ref<number>(1)
 
-  const fetchCategories = async () => {
+  const fetchCategories = async (params: {searchCategory: string|null, searchSubcategory: string|null}) => {
     categoryActions.fetchCategories()
       .then(res => {
         categories.value = res.data
@@ -26,6 +26,13 @@ export const useCategoriesPanelStore = defineStore('categoriesPanel', () => {
           if (category.subcategories.length > panelSize.value)
             panelSize.value = category.subcategories.length
         })
+      })
+      .then(() => {
+        if (params.searchCategory !== null) {
+          selectCategory(params.searchCategory)
+          if (params.searchSubcategory !== null)
+            selectSubcategory(params.searchCategory, params.searchSubcategory)
+        }
       })
   }
 
@@ -56,12 +63,15 @@ export const useCategoriesPanelStore = defineStore('categoriesPanel', () => {
   const selectCategory = (id: string) => {
     selectedCategory.value = categories.value.filter(category => category.id === id)[0]
     selectedSubcategory.value = null
+
   }
 
   const selectSubcategory = (categoryId: string, subcategoryId: string) => {
+    console.log('select sub category')
     selectedCategory.value = categories.value.filter(category => category.id === categoryId)[0]
     if (selectedCategory.value)
       selectedSubcategory.value = selectedCategory.value.subcategories.filter(subcategory => subcategory.id === subcategoryId)[0]
+
   }
 
   const togglePanel = () => {
