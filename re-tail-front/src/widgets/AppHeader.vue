@@ -53,7 +53,7 @@ const routeToFavourites = () => {
 .selected-categories {
   padding-left: 250px;
   color: var(--color-blue-green);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
 }
 </style>
