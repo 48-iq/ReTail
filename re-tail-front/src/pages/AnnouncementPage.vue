@@ -10,4 +10,5 @@ const {id} = route.params;
 <template>
   <AppHeader/>
   
+  
 </template>
