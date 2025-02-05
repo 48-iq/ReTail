@@ -1,20 +1,24 @@
 <script setup lang="ts">
-import { useCategoriesPanelStore } from '@/stores/categoriesPanelStore';
 import SubcategoryButton from '../../shared/ui/buttons/SubcategoryButton.vue';
+import type { CategoryType } from '@/entities/category';
 
-const categoriesPanelState = useCategoriesPanelStore()
 
-
+const {
+  panelSize,
+  pointedCategory,
+  selectSubcategory
+} = defineProps<{
+  panelSize: () => number,
+  pointedCategory: CategoryType | null,
+  selectSubcategory: (categoryId: string, subcategoryId: string) => void
+}>()
 </script>
 
 <template>
-  <div class="category-list" :style="{height: categoriesPanelState.getPanelSize() * 40 + 20 + 'px'}">
-    <SubcategoryButton v-for="subcategory in categoriesPanelState.pointedCategory?.subcategories"
+  <div class="category-list" :style="{height: panelSize() * 40 + 20 + 'px'}">
+    <SubcategoryButton v-for="subcategory in pointedCategory?.subcategories || []"
     :key="subcategory.id"
-    @click="() => {
-      if (categoriesPanelState.pointedCategory !== null)
-        categoriesPanelState.selectSubcategory(categoriesPanelState.pointedCategory.id, subcategory.id)
-    }">
+    @click="() => {if (pointedCategory)selectSubcategory(pointedCategory.id, subcategory.id)}">
       {{ subcategory.name }}
     </SubcategoryButton>
 

@@ -1,26 +1,40 @@
 <script setup lang="ts">
-import { useCategoriesPanelStore } from '@/stores/categoriesPanelStore';
 import AllCategoriesButton from '../../shared/ui/buttons/AllCategoriesButton.vue';
 import CategoryButton from '../../shared/ui/buttons/CategoryButton.vue';
+import type { CategoryType } from '@/entities/category';
 
-const categoriesPanelState = useCategoriesPanelStore()
+
+
+const {
+  categories,
+  panelSize,
+  selectAllCategories,
+  selectCategory,
+  pointCategory,
+  pointAllCategories
+} = defineProps<{
+  categories: CategoryType[],
+  panelSize: () => number,
+  selectAllCategories: () => void,
+  selectCategory: (id: string) => void,
+  pointCategory: (id: string) => void,
+  pointAllCategories: () => void
+}>()
+
 
 
 </script>
 
 <template>
-  <div class="category-list" :style="{height: categoriesPanelState.getPanelSize() * 40 + 20 + 'px'}">
+  <div class="category-list" :style="{height: panelSize() * 40 + 20 + 'px'}">
 
-    <AllCategoriesButton @mouseover="() => categoriesPanelState.pointAllCategories()"
-    @click="() => categoriesPanelState.selectAllCategories()"/>
+    <AllCategoriesButton @mouseover="pointAllCategories"
+    @click="selectAllCategories"/>
 
-    <CategoryButton v-for="category in categoriesPanelState.categories"
+    <CategoryButton v-for="category in categories"
     :key="category.id"
-    @mouseover="() => categoriesPanelState.pointCategory(category.id)"
-    @click="() => categoriesPanelState.selectCategory(category.id)">
-      {{ category.name }}
-    </CategoryButton>
-
+    @mouseover="() => pointCategory(category.id)"
+    @click="() => selectCategory(category.id)">{{ category.name }}</CategoryButton>
   </div>
 </template>
 <style lang="css" scoped>
