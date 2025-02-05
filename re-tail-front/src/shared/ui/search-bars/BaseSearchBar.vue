@@ -12,7 +12,7 @@
 
 <style lang="css" scoped>
   .search-bar {
-    width: 700px;
+    width: 550px;
     height: 50px;
     background-color: var(--color-white);
     border: solid 1px var(--color-blue);

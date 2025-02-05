@@ -1,24 +1,24 @@
 import axios from "axios"
 import { host } from "./host"
 
-export type Category = {
+export type CategoryType = {
   id: string
   name: string
-  subcategories: Subcategory[]
+  subcategories: SubcategoryType[]
 }
 
-export type CategoryInfo = {
+export type CategoryInfoType = {
   id: string
   name: string
 }
 
-export type Subcategory = {
+export type SubcategoryType = {
   id: string
   name: string
 }
 export const categoryActions = {
   fetchCategories: async () => {
-    return axios.get<Category[]>(`${host}/category/all`)
+    return axios.get<CategoryType[]>(`${host}/category/all`)
     .then(res => res)
   }
 }
